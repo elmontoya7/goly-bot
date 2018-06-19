@@ -1,0 +1,58 @@
+{
+  "teams": [
+    {
+      "id": "",
+      "name": "",
+      "picture": ""
+    },
+    {
+      "id": "RU",
+      "name": "Rusia",
+      "picture": ""
+    },
+    {
+      "id": "SA",
+      "name": "Arabia Saudita",
+      "picture": ""
+    },
+    {
+      "id": "EG",
+      "name": "Egipto",
+      "picture": ""
+    },
+    {
+      "id": "UY",
+      "name": "Uruguay",
+      "picture": ""
+    }
+  ],
+  "matches": [
+    {
+      "title": "",
+      "subtitle": "",
+      "time": "",
+      "teams": [],
+      "phase": "",
+      "score": [],
+      "status": ""
+    },
+    {
+      "title": "Rusia vs Arabia Saudita",
+      "subtitle": "Grupo A. 14 de Junio.",
+      "time": "18:00",
+      "teams": ["RU", "SA"],
+      "phase": "J1",
+      "score": [5, 0],
+      "status": "FINISHED"
+    },
+    {
+      "title": "Egipto vs Uruguay",
+      "subtitle": "Grupo A. 15 de Junio.",
+      "time": "17:00",
+      "teams": ["EG", "UY"],
+      "phase": "J1",
+      "score": [0, 1],
+      "status": "FINISHED"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "goly-express",
+  "version": "1.0.0",
+  "description": "Backend project for Goly bot",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Alexis Montoya",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
