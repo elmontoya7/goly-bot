@@ -37,6 +37,7 @@ app.get('/update-data', async (req, res) => {
 });
 
 app.post('/find', async (req, res) => {
+  console.log(req.body);
   if(req.body.pass && req.body.pass == password) {
     try {
       let matches = await findMatches(req.body.query || {}, req.body.limit || 0, req.body.sort || {});
