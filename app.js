@@ -13,12 +13,6 @@ const password = process.env.PASSWORD;
 let matches_json = getJSON('match-data.json');
 
 app.use(bodyParser.json({limit: '20mb'}));
-app.use(function(err, req, res, next) {
-  if (err instanceof SyntaxError && err.status === 400) {
-    console.log(err);
-    console.log(req);
-  }
-});
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 
 app.get('/', (req, res) => {
