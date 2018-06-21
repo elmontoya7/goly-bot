@@ -1,6 +1,7 @@
 var express = require('express');
 var fs = require("fs"), json;
 var bodyParser = require('body-parser');
+require('dotenv').config()
 var app = express();
 
 const mongo = require('mongodb').MongoClient;
@@ -8,7 +9,7 @@ const assert = require('assert');
 
 const mongo_url = 'mongodb://localhost:27017';
 const db_name = 'fifa';
-const password = 'pb';
+const password = process.env.PASSWORD;
 let matches_json = getJSON('match-data.json');
 
 app.use(bodyParser.json({limit: '20mb'}));
@@ -38,7 +39,7 @@ app.get('/update-data', async (req, res) => {
 app.post('/find', async (req, res) => {
   if(req.body.pass && req.body.pass == password) {
     try {
-      let matches = await findMatches(req.body.query, req.body.limit || 0);
+      let matches = await findMatches(req.body.query || {}, req.body.limit || 0, req.body.sort || {});
       return res.json(matches);
     } catch (e) {
       return res.status(500).json({error: e});
@@ -72,12 +73,15 @@ let createMatches = items => {
   });
 };
 
-let findMatches = (query, limit) => {
+let findMatches = (query, limit, sort) => {
   return new Promise ((resolve, reject) => {
     mongo.connect(mongo_url, function (err, db) {
       if(err) return resolve(null);
       var dbase = db.db(db_name);
-      dbase.collection('match').find(query).limit(limit || 0).toArray(function (err, res) {
+      dbase.collection('match').find(query || {})
+      .limit(limit || 0)
+      .sort(sort || {})
+      .toArray(function (err, res) {
         db.close();
         if(err || !res) return resolve(null);
         else {
