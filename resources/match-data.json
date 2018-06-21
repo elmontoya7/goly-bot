@@ -1,6 +1,6 @@
 {
   "matches": [
-    {
+   {
       "date":"20180614",
       "formatted_date":"14 jun. 2018",
       "group":"Grupo A",
@@ -11,8 +11,8 @@
       "score":"5-0",
       "score_home":"5",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180615",
       "formatted_date":"15 jun. 2018",
       "group":"Grupo A",
@@ -23,8 +23,8 @@
       "score":"0-1",
       "score_home":"0",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180615",
       "formatted_date":"15 jun. 2018",
       "group":"Grupo B",
@@ -35,8 +35,8 @@
       "score":"0-1",
       "score_home":"0",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180615",
       "formatted_date":"15 jun. 2018",
       "group":"Grupo B",
@@ -47,8 +47,8 @@
       "score":"3-3",
       "score_home":"3",
       "score_away":"3"
-    },
-    {
+   },
+   {
       "date":"20180616",
       "formatted_date":"16 jun. 2018",
       "group":"Grupo C",
@@ -59,8 +59,8 @@
       "score":"2-1",
       "score_home":"2",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180616",
       "formatted_date":"16 jun. 2018",
       "group":"Grupo D",
@@ -71,8 +71,8 @@
       "score":"1-1",
       "score_home":"1",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180616",
       "formatted_date":"16 jun. 2018",
       "group":"Grupo C",
@@ -83,8 +83,8 @@
       "score":"0-1",
       "score_home":"0",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180616",
       "formatted_date":"16 jun. 2018",
       "group":"Grupo D",
@@ -95,8 +95,8 @@
       "score":"2-0",
       "score_home":"2",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180617",
       "formatted_date":"17 jun. 2018",
       "group":"Grupo E",
@@ -107,8 +107,8 @@
       "score":"0-1",
       "score_home":"0",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180617",
       "formatted_date":"17 jun. 2018",
       "group":"Grupo F",
@@ -119,8 +119,8 @@
       "score":"0-1",
       "score_home":"0",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180617",
       "formatted_date":"17 jun. 2018",
       "group":"Grupo E",
@@ -131,8 +131,8 @@
       "score":"1-1",
       "score_home":"1",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180618",
       "formatted_date":"18 jun. 2018",
       "group":"Grupo F",
@@ -143,8 +143,8 @@
       "score":"1-0",
       "score_home":"1",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180618",
       "formatted_date":"18 jun. 2018",
       "group":"Grupo G",
@@ -155,8 +155,8 @@
       "score":"3-0",
       "score_home":"3",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180618",
       "formatted_date":"18 jun. 2018",
       "group":"Grupo G",
@@ -167,8 +167,8 @@
       "score":"1-2",
       "score_home":"1",
       "score_away":"2"
-    },
-    {
+   },
+   {
       "date":"20180619",
       "formatted_date":"19 jun. 2018",
       "group":"Grupo H",
@@ -179,8 +179,8 @@
       "score":"1-2",
       "score_home":"1",
       "score_away":"2"
-    },
-    {
+   },
+   {
       "date":"20180619",
       "formatted_date":"19 jun. 2018",
       "group":"Grupo H",
@@ -191,8 +191,8 @@
       "score":"1-2",
       "score_home":"1",
       "score_away":"2"
-    },
-    {
+   },
+   {
       "date":"20180619",
       "formatted_date":"19 jun. 2018",
       "group":"Grupo A",
@@ -203,44 +203,44 @@
       "score":"3-1",
       "score_home":"3",
       "score_away":"1"
-    },
-    {
+   },
+   {
       "date":"20180620",
       "formatted_date":"20 jun. 2018",
       "group":"Grupo B",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"Portugal",
       "team_away":"Marruecos",
       "time":"15:00",
-      "score":"0-0",
-      "score_home":"0",
+      "score":"1-0",
+      "score_home":"1",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180620",
       "formatted_date":"20 jun. 2018",
       "group":"Grupo A",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"Uruguay",
       "team_away":"Arabia Saudí",
       "time":"18:00",
-      "score":"0-0",
-      "score_home":"0",
+      "score":"1-0",
+      "score_home":"1",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180620",
       "formatted_date":"20 jun. 2018",
       "group":"Grupo B",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"RI de Irán",
       "team_away":"España",
       "time":"21:00",
-      "score":"0-0",
+      "score":"0-1",
       "score_home":"0",
-      "score_away":"0"
-    },
-    {
+      "score_away":"1"
+   },
+   {
       "date":"20180621",
       "formatted_date":"21 jun. 2018",
       "group":"Grupo C",
@@ -251,8 +251,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180621",
       "formatted_date":"21 jun. 2018",
       "group":"Grupo C",
@@ -263,8 +263,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180621",
       "formatted_date":"21 jun. 2018",
       "group":"Grupo D",
@@ -275,8 +275,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180622",
       "formatted_date":"22 jun. 2018",
       "group":"Grupo E",
@@ -287,8 +287,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180622",
       "formatted_date":"22 jun. 2018",
       "group":"Grupo D",
@@ -299,8 +299,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180622",
       "formatted_date":"22 jun. 2018",
       "group":"Grupo E",
@@ -311,8 +311,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180623",
       "formatted_date":"23 jun. 2018",
       "group":"Grupo G",
@@ -323,8 +323,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180623",
       "formatted_date":"23 jun. 2018",
       "group":"Grupo F",
@@ -335,8 +335,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180623",
       "formatted_date":"23 jun. 2018",
       "group":"Grupo F",
@@ -347,8 +347,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180624",
       "formatted_date":"24 jun. 2018",
       "group":"Grupo G",
@@ -359,8 +359,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180624",
       "formatted_date":"24 jun. 2018",
       "group":"Grupo H",
@@ -371,8 +371,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180624",
       "formatted_date":"24 jun. 2018",
       "group":"Grupo H",
@@ -383,8 +383,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180625",
       "formatted_date":"25 jun. 2018",
       "group":"Grupo A",
@@ -395,8 +395,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180625",
       "formatted_date":"25 jun. 2018",
       "group":"Grupo A",
@@ -407,8 +407,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180625",
       "formatted_date":"25 jun. 2018",
       "group":"Grupo B",
@@ -419,8 +419,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180625",
       "formatted_date":"25 jun. 2018",
       "group":"Grupo B",
@@ -431,8 +431,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180626",
       "formatted_date":"26 jun. 2018",
       "group":"Grupo C",
@@ -443,8 +443,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180626",
       "formatted_date":"26 jun. 2018",
       "group":"Grupo C",
@@ -455,8 +455,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180626",
       "formatted_date":"26 jun. 2018",
       "group":"Grupo D",
@@ -467,8 +467,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180626",
       "formatted_date":"26 jun. 2018",
       "group":"Grupo D",
@@ -479,8 +479,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180627",
       "formatted_date":"27 jun. 2018",
       "group":"Grupo F",
@@ -491,8 +491,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180627",
       "formatted_date":"27 jun. 2018",
       "group":"Grupo F",
@@ -503,8 +503,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180627",
       "formatted_date":"27 jun. 2018",
       "group":"Grupo E",
@@ -515,8 +515,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180627",
       "formatted_date":"27 jun. 2018",
       "group":"Grupo E",
@@ -527,8 +527,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180628",
       "formatted_date":"28 jun. 2018",
       "group":"Grupo H",
@@ -539,8 +539,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180628",
       "formatted_date":"28 jun. 2018",
       "group":"Grupo H",
@@ -551,8 +551,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180628",
       "formatted_date":"28 jun. 2018",
       "group":"Grupo G",
@@ -563,8 +563,8 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    },
-    {
+   },
+   {
       "date":"20180628",
       "formatted_date":"28 jun. 2018",
       "group":"Grupo G",
@@ -575,6 +575,6 @@
       "score":"0-0",
       "score_home":"0",
       "score_away":"0"
-    }
-  ]
+   }
+ ]
 }
