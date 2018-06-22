@@ -244,37 +244,37 @@
       "date":"20180621",
       "formatted_date":"21 jun. 2018",
       "group":"Grupo C",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"Dinamarca",
       "team_away":"Australia",
       "time":"16:00",
-      "score":"0-0",
-      "score_home":"0",
-      "score_away":"0"
+      "score":"1-1",
+      "score_home":"1",
+      "score_away":"1"
    },
    {
       "date":"20180621",
       "formatted_date":"21 jun. 2018",
       "group":"Grupo C",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"Francia",
       "team_away":"Perú",
       "time":"20:00",
-      "score":"0-0",
-      "score_home":"0",
+      "score":"1-0",
+      "score_home":"1",
       "score_away":"0"
    },
    {
       "date":"20180621",
       "formatted_date":"21 jun. 2018",
       "group":"Grupo D",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"Argentina",
       "team_away":"Croacia",
       "time":"21:00",
-      "score":"0-0",
+      "score":"0-3",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"3"
    },
    {
       "date":"20180622",

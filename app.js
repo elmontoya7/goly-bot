@@ -25,8 +25,34 @@ app.get('/update-data', async (req, res) => {
     try {
       let matches = await findMatches({});
       if(matches && matches.length) {
-        console.log('Not created.');
-        return res.json(matches);
+        let promises = [];
+        for(match of matches_json.matches) {
+          promises.push(
+            updateMatch(
+              {
+                team_home: match.team_home,
+                team_away: match.team_away,
+                date: match.date
+              },
+              {
+                $set: {
+                  score: match.score,
+                  score_home: match.score_home,
+                  score_away: match.score_away,
+                  status: match.status
+                }
+              }
+            )
+          );
+        }
+
+        Promise.all(promises).then(results => {
+          console.log('All updated!');
+          return res.json(results);
+        }, err => {
+          console.log(err);
+          return res.json({error: err});
+        });
       } else {
         let created_matches = await createMatches(matches_json.matches);
         return res.json(created_matches);
@@ -76,6 +102,20 @@ let createMatches = items => {
         if(res.result && res.result.ok)
           return resolve(res.ops);
         else return resolve(null);
+      });
+    });
+  });
+};
+
+let updateMatch = (item, newData) => {
+  return new Promise ((resolve, reject) => {
+    mongo.connect(mongo_url, function (err, db) {
+      if(err) return resolve(null);
+      var dbase = db.db(db_name);
+      dbase.collection('match').updateOne(item, newData, function (err, res) {
+        db.close();
+        if(err || !res) return resolve(null);
+        return resolve(res);
       });
     });
   });
