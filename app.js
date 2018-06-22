@@ -66,6 +66,33 @@ app.get('/update-data', async (req, res) => {
   } else return res.json({error: 'No password.'});
 });
 
+app.post('/update', async (req, res) => {
+  if(req.body.pass && req.body.pass == password) {
+    let match = req.body.update;
+    try {
+      let update = await updateMatch(
+        {
+          team_home: match.team_home,
+          team_away: match.team_away,
+          date: match.date
+        },
+        {
+          $set: {
+            score: match.score,
+            score_home: match.score_home,
+            score_away: match.score_away,
+            status: match.status
+          }
+        }
+      );
+      return res.json(update);
+    } catch (e) {
+      console.log(e);
+      return res.json({error: e});
+    }
+  } else return res.json({error: 'No password.'});
+});
+
 app.post('/find', async (req, res) => {
   console.log(req.body);
   if(req.body.pass && req.body.pass == password) {
