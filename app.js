@@ -74,7 +74,7 @@ app.post('/find', async (req, res) => {
 
     try {
       let matches = await findMatches(req.body.query || {}, req.body.limit || 0, req.body.sort || {});
-      return res.json(matches);
+      return res.json({matches: matches});
     } catch (e) {
       return res.status(500).json({error: e});
     }
