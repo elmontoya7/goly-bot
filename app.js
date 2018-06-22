@@ -5,6 +5,8 @@ var moment = require('moment');
 require('dotenv').config()
 var app = express();
 
+app.use(express.static('public'));
+
 const mongo = require('mongodb').MongoClient;
 const assert = require('assert');
 
