@@ -14,6 +14,7 @@ const mongo_url = 'mongodb://localhost:27017';
 const db_name = 'fifa';
 const password = process.env.PASSWORD;
 let matches_json = getJSON('match-data.json');
+let new_matches_json = getJSON('new-matches.json');
 
 app.use(bodyParser.json({limit: '20mb'}));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
@@ -28,7 +29,7 @@ app.get('/update-data', async (req, res) => {
       let matches = await findMatches({});
       if(matches && matches.length) {
         let promises = [];
-        for(match of matches_json.matches) {
+        for(match of new_matches_json.matches) {
           promises.push(
             updateMatch(
               {
