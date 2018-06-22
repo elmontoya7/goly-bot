@@ -1,6 +1,7 @@
 var express = require('express');
 var fs = require("fs"), json;
 var bodyParser = require('body-parser');
+var moment = require('moment');
 require('dotenv').config()
 var app = express();
 
@@ -39,6 +40,12 @@ app.get('/update-data', async (req, res) => {
 app.post('/find', async (req, res) => {
   console.log(req.body);
   if(req.body.pass && req.body.pass == password) {
+    //parse today and set current date
+    if(req.body.query && req.body.query.date) {
+      if(req.body.query.date == 'TODAY')
+        req.body.query.date = moment().format("YYYYMMDD");
+    }
+
     try {
       let matches = await findMatches(req.body.query || {}, req.body.limit || 0, req.body.sort || {});
       return res.json(matches);
