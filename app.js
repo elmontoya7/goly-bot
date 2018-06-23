@@ -140,7 +140,7 @@ app.post('/find', async (req, res) => {
           if(time.isValid()) {
             if(moment.duration(time.diff(now))._data.seconds < 0) {
               match.in_about = 'EN VIVO';
-              match.status = 'En progreso'
+              match.status = ' '
             }
             else
               match.in_about = 'en ' + moment.duration(time.diff(now)).locale('es').humanize();
