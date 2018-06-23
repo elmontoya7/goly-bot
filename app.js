@@ -250,7 +250,7 @@ function parseBody (body, callback) {
         let score = match_row.find('span.fi-s__scoreText').first().text().trim();
         if(score.indexOf("-") == -1) {
           console.log(score);
-          match_obj.time = moment(score, "HH:mm").subtract(8, 'hours').format('HH:mm');
+          match_obj.time = moment(score, "HH:mm").subtract(2, 'hours').format('HH:mm');
           match_obj.score = 'vs';
           match_obj.score_home = "0";
           match_obj.score_away = "0";
