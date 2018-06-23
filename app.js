@@ -115,7 +115,7 @@ app.post('/find', async (req, res) => {
           let now = moment();
           console.log(time);
           console.log(now);
-          console.log(moment.duration(time.diff(now)).locale('es').humanize(););
+          console.log(moment.duration(time.diff(now)).locale('es').humanize());
           if(time.isValid()) {
             if(moment.duration(time.diff(now))._data.seconds < 0)
               match.in_about = 'EN VIVO';
