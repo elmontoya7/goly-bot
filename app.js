@@ -44,7 +44,8 @@ app.get('/update-data', async (req, res) => {
                   score_away: match.score_away,
                   status: match.status,
                   match: match.match,
-                  image: match.image
+                  image: match.image,
+                  time: match.time
                 }
               }
             )
@@ -85,7 +86,8 @@ app.post('/update', async (req, res) => {
             score_away: match.score_away,
             status: match.status,
             match: match.match,
-            image: match.image
+            image: match.image,
+            time: match.time
           }
         }
       );
