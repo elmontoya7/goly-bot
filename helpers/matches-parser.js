@@ -27,6 +27,8 @@ $('.fi-mu-list').each((index, row) => {
         match_obj.score_home = score.split('-')[0];
         match_obj.score_away = score.split('-')[1];
       }
+
+      match_obj.match = matches.length + 1;
       matches.push(match_obj);
     });
   }

@@ -42,7 +42,8 @@ app.get('/update-data', async (req, res) => {
                   score: match.score,
                   score_home: match.score_home,
                   score_away: match.score_away,
-                  status: match.status
+                  status: match.status,
+                  match: match.match
                 }
               }
             )

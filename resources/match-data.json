@@ -10,7 +10,8 @@
       "time":"18:00",
       "score":"5-0",
       "score_home":"5",
-      "score_away":"0"
+      "score_away":"0",
+      "match":1
    },
    {
       "date":"20180615",
@@ -22,7 +23,8 @@
       "time":"17:00",
       "score":"0-1",
       "score_home":"0",
-      "score_away":"1"
+      "score_away":"1",
+      "match":2
    },
    {
       "date":"20180615",
@@ -34,7 +36,8 @@
       "time":"18:00",
       "score":"0-1",
       "score_home":"0",
-      "score_away":"1"
+      "score_away":"1",
+      "match":3
    },
    {
       "date":"20180615",
@@ -46,7 +49,8 @@
       "time":"21:00",
       "score":"3-3",
       "score_home":"3",
-      "score_away":"3"
+      "score_away":"3",
+      "match":4
    },
    {
       "date":"20180616",
@@ -58,7 +62,8 @@
       "time":"13:00",
       "score":"2-1",
       "score_home":"2",
-      "score_away":"1"
+      "score_away":"1",
+      "match":5
    },
    {
       "date":"20180616",
@@ -70,7 +75,8 @@
       "time":"16:00",
       "score":"1-1",
       "score_home":"1",
-      "score_away":"1"
+      "score_away":"1",
+      "match":6
    },
    {
       "date":"20180616",
@@ -82,7 +88,8 @@
       "time":"19:00",
       "score":"0-1",
       "score_home":"0",
-      "score_away":"1"
+      "score_away":"1",
+      "match":7
    },
    {
       "date":"20180616",
@@ -94,7 +101,8 @@
       "time":"21:00",
       "score":"2-0",
       "score_home":"2",
-      "score_away":"0"
+      "score_away":"0",
+      "match":8
    },
    {
       "date":"20180617",
@@ -106,7 +114,8 @@
       "time":"16:00",
       "score":"0-1",
       "score_home":"0",
-      "score_away":"1"
+      "score_away":"1",
+      "match":9
    },
    {
       "date":"20180617",
@@ -118,7 +127,8 @@
       "time":"18:00",
       "score":"0-1",
       "score_home":"0",
-      "score_away":"1"
+      "score_away":"1",
+      "match":10
    },
    {
       "date":"20180617",
@@ -130,7 +140,8 @@
       "time":"21:00",
       "score":"1-1",
       "score_home":"1",
-      "score_away":"1"
+      "score_away":"1",
+      "match":11
    },
    {
       "date":"20180618",
@@ -142,7 +153,8 @@
       "time":"15:00",
       "score":"1-0",
       "score_home":"1",
-      "score_away":"0"
+      "score_away":"0",
+      "match":12
    },
    {
       "date":"20180618",
@@ -154,7 +166,8 @@
       "time":"18:00",
       "score":"3-0",
       "score_home":"3",
-      "score_away":"0"
+      "score_away":"0",
+      "match":13
    },
    {
       "date":"20180618",
@@ -166,7 +179,8 @@
       "time":"21:00",
       "score":"1-2",
       "score_home":"1",
-      "score_away":"2"
+      "score_away":"2",
+      "match":14
    },
    {
       "date":"20180619",
@@ -178,7 +192,8 @@
       "time":"15:00",
       "score":"1-2",
       "score_home":"1",
-      "score_away":"2"
+      "score_away":"2",
+      "match":15
    },
    {
       "date":"20180619",
@@ -190,7 +205,8 @@
       "time":"18:00",
       "score":"1-2",
       "score_home":"1",
-      "score_away":"2"
+      "score_away":"2",
+      "match":16
    },
    {
       "date":"20180619",
@@ -202,7 +218,8 @@
       "time":"21:00",
       "score":"3-1",
       "score_home":"3",
-      "score_away":"1"
+      "score_away":"1",
+      "match":17
    },
    {
       "date":"20180620",
@@ -214,7 +231,8 @@
       "time":"15:00",
       "score":"1-0",
       "score_home":"1",
-      "score_away":"0"
+      "score_away":"0",
+      "match":18
    },
    {
       "date":"20180620",
@@ -226,7 +244,8 @@
       "time":"18:00",
       "score":"1-0",
       "score_home":"1",
-      "score_away":"0"
+      "score_away":"0",
+      "match":19
    },
    {
       "date":"20180620",
@@ -238,7 +257,8 @@
       "time":"21:00",
       "score":"0-1",
       "score_home":"0",
-      "score_away":"1"
+      "score_away":"1",
+      "match":20
    },
    {
       "date":"20180621",
@@ -250,7 +270,8 @@
       "time":"16:00",
       "score":"1-1",
       "score_home":"1",
-      "score_away":"1"
+      "score_away":"1",
+      "match":21
    },
    {
       "date":"20180621",
@@ -262,7 +283,8 @@
       "time":"20:00",
       "score":"1-0",
       "score_home":"1",
-      "score_away":"0"
+      "score_away":"0",
+      "match":22
    },
    {
       "date":"20180621",
@@ -274,43 +296,47 @@
       "time":"21:00",
       "score":"0-3",
       "score_home":"0",
-      "score_away":"3"
+      "score_away":"3",
+      "match":23
    },
    {
       "date":"20180622",
       "formatted_date":"22 jun. 2018",
       "group":"Grupo E",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"Brasil",
       "team_away":"Costa Rica",
       "time":"15:00",
-      "score":"0-0",
-      "score_home":"0",
-      "score_away":"0"
+      "score":"2-0",
+      "score_home":"2",
+      "score_away":"0",
+      "match":24
    },
    {
       "date":"20180622",
       "formatted_date":"22 jun. 2018",
       "group":"Grupo D",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"Nigeria",
       "team_away":"Islandia",
       "time":"18:00",
-      "score":"0-0",
-      "score_home":"0",
-      "score_away":"0"
+      "score":"2-0",
+      "score_home":"2",
+      "score_away":"0",
+      "match":25
    },
    {
       "date":"20180622",
       "formatted_date":"22 jun. 2018",
       "group":"Grupo E",
-      "status":"Pendiente",
+      "status":"Final del partido",
       "team_home":"Serbia",
       "team_away":"Suiza",
       "time":"20:00",
-      "score":"0-0",
-      "score_home":"0",
-      "score_away":"0"
+      "score":"1-2",
+      "score_home":"1",
+      "score_away":"2",
+      "match":26
    },
    {
       "date":"20180623",
@@ -322,7 +348,8 @@
       "time":"15:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":27
    },
    {
       "date":"20180623",
@@ -334,7 +361,8 @@
       "time":"18:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":28
    },
    {
       "date":"20180623",
@@ -346,7 +374,8 @@
       "time":"21:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":29
    },
    {
       "date":"20180624",
@@ -358,7 +387,8 @@
       "time":"15:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":30
    },
    {
       "date":"20180624",
@@ -370,7 +400,8 @@
       "time":"20:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":31
    },
    {
       "date":"20180624",
@@ -382,7 +413,8 @@
       "time":"21:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":32
    },
    {
       "date":"20180625",
@@ -394,7 +426,8 @@
       "time":"18:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":33
    },
    {
       "date":"20180625",
@@ -406,7 +439,8 @@
       "time":"17:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":34
    },
    {
       "date":"20180625",
@@ -418,7 +452,8 @@
       "time":"20:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":35
    },
    {
       "date":"20180625",
@@ -430,7 +465,8 @@
       "time":"21:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":36
    },
    {
       "date":"20180626",
@@ -442,7 +478,8 @@
       "time":"17:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":37
    },
    {
       "date":"20180626",
@@ -454,7 +491,8 @@
       "time":"17:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":38
    },
    {
       "date":"20180626",
@@ -466,7 +504,8 @@
       "time":"21:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":39
    },
    {
       "date":"20180626",
@@ -478,7 +517,8 @@
       "time":"21:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":40
    },
    {
       "date":"20180627",
@@ -490,7 +530,8 @@
       "time":"17:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":41
    },
    {
       "date":"20180627",
@@ -502,7 +543,8 @@
       "time":"19:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":42
    },
    {
       "date":"20180627",
@@ -514,7 +556,8 @@
       "time":"21:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":43
    },
    {
       "date":"20180627",
@@ -526,7 +569,8 @@
       "time":"21:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":44
    },
    {
       "date":"20180628",
@@ -538,7 +582,8 @@
       "time":"17:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":45
    },
    {
       "date":"20180628",
@@ -550,7 +595,8 @@
       "time":"18:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":46
    },
    {
       "date":"20180628",
@@ -562,7 +608,8 @@
       "time":"21:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":47
    },
    {
       "date":"20180628",
@@ -574,7 +621,8 @@
       "time":"20:00",
       "score":"0-0",
       "score_home":"0",
-      "score_away":"0"
+      "score_away":"0",
+      "match":48
    }
  ]
 }
