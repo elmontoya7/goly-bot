@@ -30,7 +30,7 @@ $('.fi-mu-list').each((index, row) => {
       }
 
       match_obj.match = matches.length + 1;
-      match_obj.image = match_obj.match > 26 ?
+      match_obj.image = match_obj.match > 27 ?
         'http://ec2-54-200-239-86.us-west-2.compute.amazonaws.com/images/russia_back.jpg' :
         'http://ec2-54-200-239-86.us-west-2.compute.amazonaws.com/images/matches/' + match_obj.match + '.jpg';
       matches.push(match_obj);
