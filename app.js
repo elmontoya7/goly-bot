@@ -240,8 +240,6 @@ function parseBody (body, callback) {
         match_obj.group = match_row.find('.fi__info__group').first().text().trim();
         match_obj.status = match_row.find('span.period:not(.hidden)').first().text().trim() || 'Pendiente';
 
-        console.log(match_row.find('span.period:not(.hidden)').text().trim());
-
         let team_home = match_row.find('.fi-t.home').first();
         match_obj.team_home = team_home.find('.fi-t__nText').first().text().trim();
         let team_away = match_row.find('.fi-t.away').first();
