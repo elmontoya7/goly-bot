@@ -19,7 +19,8 @@ $('.fi-mu-list').each((index, row) => {
 
       let score = match_row.find('span.fi-s__scoreText').first().text().trim();
       if(score.indexOf("-") == -1) {
-        match_obj.score = '0-0';
+        match_obj.time = score;
+        match_obj.score = 'vs';
         match_obj.score_home = "0";
         match_obj.score_away = "0";
       } else {
