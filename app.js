@@ -149,7 +149,7 @@ app.post('/find', async (req, res) => {
           }
         }
       }
-      return res.status(matches.length ? 200 : 404).json({matches: matches});
+      return res.status(matches.length ? 200 : 500).json({matches: matches});
     } catch (e) {
       return res.status(500).json({error: e});
     }
