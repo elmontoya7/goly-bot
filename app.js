@@ -107,6 +107,7 @@ app.post('/find', async (req, res) => {
     try {
       let matches = await findMatches(req.body.query || {}, req.body.limit || 0, req.body.sort || {});
       for(match of matches) {
+        match.in_about = '';
         if(match.status == 'Pendiente') {
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
           let now = moment();
