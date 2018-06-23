@@ -111,11 +111,9 @@ app.post('/find', async (req, res) => {
       for(match of matches) {
         match.in_about = ' ';
         if(match.status == 'Pendiente') {
+          console.log(match.time);
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
           let now = moment();
-          console.log(time);
-          console.log(now);
-          console.log(moment.duration(time.diff(now)).locale('es').humanize());
           if(time.isValid()) {
             if(moment.duration(time.diff(now))._data.seconds < 0)
               match.in_about = 'EN VIVO';
