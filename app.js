@@ -113,7 +113,6 @@ app.post('/find', async (req, res) => {
       for(match of matches) {
         match.in_about = ' ';
         if(match.status == 'Pendiente') {
-          console.log(match.time);
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
           let now = moment();
           if(time.isValid()) {
