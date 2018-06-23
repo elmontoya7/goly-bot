@@ -137,9 +137,6 @@ app.post('/find', async (req, res) => {
         if(match.status != 'Final del partido') {
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
           let now = moment();
-          console.log(time.format());
-          console.log(now.format());
-          console.log(moment.duration(time.diff(now)));
           if(time.isValid()) {
             if(moment.duration(time.diff(now))._data.seconds < 0)
               match.in_about = 'EN VIVO';
@@ -242,6 +239,7 @@ function parseBody (body, callback) {
         match_obj.formatted_date = match_row.find('.fi__info__datetime--abbr').first().text().trim();
         match_obj.group = match_row.find('.fi__info__group').first().text().trim();
         match_obj.status = match_row.find('span.period:not(.hidden)').first().text().trim() || 'Pendiente';
+        console.log(match_obj.status);
 
         let team_home = match_row.find('.fi-t.home').first();
         match_obj.team_home = team_home.find('.fi-t__nText').first().text().trim();
