@@ -2,6 +2,9 @@ var express = require('express');
 var fs = require("fs"), json;
 var bodyParser = require('body-parser');
 var moment = require('moment');
+const cheerio = require('cheerio');
+var fs = require('fs');
+var request = require('request');
 require('dotenv').config()
 var app = express();
 
@@ -66,6 +69,25 @@ app.get('/update-data', async (req, res) => {
     } catch (e) {
       return res.status(500).json({error: e});
     }
+  } else return res.json({error: 'No password.'});
+});
+
+app.get('/update', async (req, res) => {
+  if(req.query.pass && req.query.pass == password) {
+    request.get({url: 'https://es.fifa.com/worldcup/matches/?cid=go_box', json: true}, (err, http, body) => {
+      if(err || !body) return res.json({error: err});
+      parseBody(body, response => {
+        return res.json(response);
+      });
+    });
+  } else return res.json({error: 'No password.'});
+});
+
+app.post('/create-file', (req, res) => {
+  if(req.body.pass && req.body.pass == password && req.body.url && req.body.file_name) {
+    download(req.body.url, './public/images/matches/' + req.body.file_name, response => {
+      res.json(response);
+    });
   } else return res.json({error: 'No password.'});
 });
 
@@ -203,3 +225,94 @@ function getJSON(file){
   var filepath = __dirname + '/resources/' + file;
   return readJsonFileSync(filepath);
 }
+
+function parseBody (body, callback) {
+  let matches = [];
+  var $ = cheerio.load(body);
+  $('.fi-mu-list').each((index, row) => {
+    let matches_row = $(row);
+    if(parseInt(matches_row.attr('data-matchesdate')) <= 20180628) {
+      matches_row.find('.fi-mu__link').each((index, match) => {
+        let match_obj = {};
+        let match_row = $(match);
+        match_obj.date = matches_row.attr('data-matchesdate');
+        match_obj.formatted_date = match_row.find('.fi__info__datetime--abbr').first().text().trim();
+        match_obj.group = match_row.find('.fi__info__group').first().text().trim();
+        match_obj.status = match_row.find('span.period:not(.hidden)').first().text().trim() || 'Pendiente';
+
+        let team_home = match_row.find('.fi-t.home').first();
+        match_obj.team_home = team_home.find('.fi-t__nText').first().text().trim();
+        let team_away = match_row.find('.fi-t.away').first();
+        match_obj.team_away = team_away.find('.fi-t__nText').first().text().trim();
+
+        match_obj.time = match_row.find('.fi-s__score.fi-s__date-HHmm').first().attr('data-timelocal');
+
+        let score = match_row.find('span.fi-s__scoreText').first().text().trim();
+        if(score.indexOf("-") == -1) {
+          match_obj.time = moment(score, "HH:mm").subtract(8, 'hours').format('HH:mm');
+          match_obj.score = 'vs';
+          match_obj.score_home = "0";
+          match_obj.score_away = "0";
+        } else {
+          match_obj.score = score;
+          match_obj.score_home = score.split('-')[0];
+          match_obj.score_away = score.split('-')[1];
+        }
+
+        match_obj.match = matches.length + 1;
+        if (fs.existsSync(__dirname + '/public/images/matches/' + match_obj.match + '.jpg')) {
+          match_obj.image = 'http://ec2-54-200-239-86.us-west-2.compute.amazonaws.com/images/matches/' + match_obj.match + '.jpg';
+        } else {
+          match_obj.image = 'http://ec2-54-200-239-86.us-west-2.compute.amazonaws.com/images/russia_back.jpg';
+        }
+
+        matches.push(match_obj);
+      });
+    }
+  });
+
+  let promises = [];
+  for(match of matches) {
+    promises.push(
+      updateMatch(
+        {
+          team_home: match.team_home,
+          team_away: match.team_away,
+          date: match.date
+        },
+        {
+          $set: {
+            score: match.score,
+            score_home: match.score_home,
+            score_away: match.score_away,
+            status: match.status,
+            match: match.match,
+            image: match.image,
+            time: match.time
+          }
+        }
+      )
+    );
+  }
+
+  Promise.all(promises).then(results => {
+    console.log('All updated!');
+    return callback(results);
+  }, err => {
+    console.log(err);
+    return callback({error: err});
+  });
+}
+
+var download = function(url, dest, callback) {
+  let file = fs.createWriteStream(dest);
+  request(url).on('error', err => {
+    fs.unlink(dest);
+    return callback({success: false, error: err});
+  })
+  .pipe(file)
+  .on('finish', () => {
+    file.close();
+    return callback({success: true});
+  });
+};
