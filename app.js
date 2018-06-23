@@ -249,10 +249,10 @@ function parseBody (body, callback) {
         match_obj.team_away = team_away.find('.fi-t__nText').first().text().trim();
 
         match_obj.time = match_row.find('.fi-s__score.fi-s__date-HHmm').first().attr('data-timelocal');
+        match_obj.time = moment(match_obj.time, "HH:mm").subtract(8, 'hours').format('HH:mm');
 
         let score = match_row.find('span.fi-s__scoreText').first().text().trim();
         if(score.indexOf("-") == -1) {
-          match_obj.time = moment(score, "HH:mm").subtract(8, 'hours').format('HH:mm');
           match_obj.score = 'vs';
           match_obj.score_home = "0";
           match_obj.score_away = "0";
