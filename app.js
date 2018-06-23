@@ -112,7 +112,10 @@ app.post('/find', async (req, res) => {
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
           let now = moment();
           if(time.isValid()) {
-            match.in_about = 'en ' + moment.duration(time.diff(now)).locale('es').humanize();
+            if(moment.duration(time.diff(now))._data.seconds < 0)
+              match.in_about = 'EN VIVO';
+            else
+              match.in_about = 'en ' + moment.duration(time.diff(now)).locale('es').humanize();
           } else {
             match.in_about = ' ';
           }
