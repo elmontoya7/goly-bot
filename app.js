@@ -107,6 +107,8 @@ app.post('/find', async (req, res) => {
     }
 
     try {
+      console.log(moment().format("DD MMMM YYYY HH:mm"));
+      console.log(moment.utc().format("DD MMMM YYYY HH:mm"));
       let matches = await findMatches(req.body.query || {}, req.body.limit || 0, req.body.sort || {});
       for(match of matches) {
         match.in_about = ' ';
