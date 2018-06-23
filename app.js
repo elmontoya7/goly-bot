@@ -134,9 +134,11 @@ app.post('/find', async (req, res) => {
       let matches = await findMatches(req.body.query || {}, req.body.limit || 0, req.body.sort || {});
       for(match of matches) {
         match.in_about = ' ';
-        if(match.status == 'Pendiente') {
+        if(match.status != 'Final del partido') {
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
           let now = moment();
+          console.log(time.format());
+          console.log(now.format());
           if(time.isValid()) {
             if(moment.duration(time.diff(now))._data.seconds < 0)
               match.in_about = 'EN VIVO';
@@ -249,7 +251,6 @@ function parseBody (body, callback) {
 
         let score = match_row.find('span.fi-s__scoreText').first().text().trim();
         if(score.indexOf("-") == -1) {
-          console.log(score);
           match_obj.time = moment(score, "HH:mm").subtract(8, 'hours').format('HH:mm');
           match_obj.score = 'vs';
           match_obj.score_home = "0";
