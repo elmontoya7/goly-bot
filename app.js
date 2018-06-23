@@ -238,7 +238,7 @@ function parseBody (body, callback) {
         match_obj.date = matches_row.attr('data-matchesdate');
         match_obj.formatted_date = match_row.find('.fi__info__datetime--abbr').first().text().trim();
         match_obj.group = match_row.find('.fi__info__group').first().text().trim();
-        match_obj.status = match_row.find('span.period:not(.hidden)').first().text().trim() || 'Pendiente';
+        match_obj.status = match_row.find('span.period:not(.hidden)').first().text().trim();
         console.log(match_obj.status);
 
         let team_home = match_row.find('.fi-t.home').first();
