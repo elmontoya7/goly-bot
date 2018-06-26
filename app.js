@@ -187,17 +187,19 @@ app.post('/find', async (req, res) => {
               match.in_about = 'EN VIVO';
               let minutes_pass = moment.duration(now.diff(time))._data.minutes;
               let hours_pass = moment.duration(now.diff(time))._data.hours;
+              console.log(hours_pass);
+              console.log(minutes_pass);
               if(hours_pass == 0) {
                 if(minutes_pass > 0 && minutes_pass <= 47) match.status = minutes_pass + "'";
-                if(minutes_pass > 47 && minutes_pass <= 60) match.status = 'Medio tiempo.';
+                else if(minutes_pass > 47 && minutes_pass <= 60) match.status = 'Medio tiempo.';
                 else match.status = ' ';
               } else if(hours_pass == 1) {
-                if(minutes_pass > 2 && minutes_pass <= 49) match.status = '2T ' + minutes_pass + "'";
-                if(minutes_pass >= 50 && minutes_pass <= 60) match.status = '1er Tiempo extra';
+                if(minutes_pass >= 2 && minutes_pass <= 50) match.status = '2T ' + minutes_pass + "'";
+                else if(minutes_pass > 50 && minutes_pass <= 60) match.status = '1er Tiempo extra';
                 else match.status = ' ';
               } else if(hours_pass == 2) {
                 if(minutes_pass > 0 && minutes_pass <= 15) match.status = '2do Tiempo extra';
-                if(minutes_pass > 15) match.status = 'Penales.';
+                else if(minutes_pass > 15) match.status = 'Penales.';
               } else match.status = ' ';
             }
             else
