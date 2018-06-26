@@ -187,8 +187,6 @@ app.post('/find', async (req, res) => {
               match.in_about = 'EN VIVO';
               let minutes_pass = moment.duration(now.diff(time))._data.minutes;
               let hours_pass = moment.duration(now.diff(time))._data.hours;
-              console.log(hours_pass);
-              console.log(minutes_pass);
               if(hours_pass == 0) {
                 if(minutes_pass > 0 && minutes_pass <= 47) match.status = minutes_pass + "'";
                 else if(minutes_pass > 47 && minutes_pass <= 60) match.status = 'Medio tiempo.';
