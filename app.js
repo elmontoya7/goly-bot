@@ -22,6 +22,33 @@ let new_matches_json = getJSON('new-matches.json');
 app.use(bodyParser.json({limit: '20mb'}));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 
+var CronJob = require('cron').CronJob;
+var job = new CronJob('*/5 9-16 * * *', async function() {
+    try {
+      let response = await updateData();
+      if(response && response instanceof Array) {
+        try {
+          var updated = 0;
+          response = JSON.parse(JSON.stringify(response));
+          for(let item of response) {
+            if(item.nModified) updated++;
+          }
+          console.log('updated: ' + updated);
+        } catch (e) {
+          console.log(e);
+        }
+      } else console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  null,
+  true,
+  'America/Mexico_City'
+);
+
+if(job.running) console.log('Cron running!');
+
 app.get('/', (req, res) => {
   res.send('Pulpo Bot v1.0');
 });
