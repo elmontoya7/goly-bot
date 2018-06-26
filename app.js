@@ -181,7 +181,11 @@ app.post('/find', async (req, res) => {
           if(time.isValid()) {
             if(moment.duration(time.diff(now))._data.seconds < 0) {
               match.in_about = 'EN VIVO';
-              match.status = ' '
+              let minutes_pass = moment.duration(now.diff(time))._data.minutes;
+              if(minutes_pass > 0 && minutes_pass <= 45) match.status = minutes_pass + "'";
+              else if(minutes_pass > 45 && minutes_pass <= 60) match.status = 'Medio tiempo';
+              else if(minutes_pass > 60 && minutes_pass <= 105) match.status = (minutes_pass - 15) + "'";
+              else match.status = '';
             }
             else
               match.in_about = 'en ' + moment.duration(time.diff(now)).locale('es').humanize();
