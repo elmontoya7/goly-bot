@@ -77,7 +77,18 @@ app.get('/update', async (req, res) => {
     request.get({url: 'https://es.fifa.com/worldcup/matches/?cid=go_box', json: true}, (err, http, body) => {
       if(err || !body) return res.json({error: err});
       parseBody(body, response => {
-        return res.json(response);
+        if(response instanceof Array) {
+          try {
+            var updated = 0;
+            for(let item of response) {
+              if(item.nModified) updated++;
+            }
+            return res.json({updated_items: updated});
+          } catch (e) {
+            console.log(e);
+            return res.json({status: 'data updated', error: e});
+          }
+        } else return res.json(response);
       });
     });
   } else return res.json({error: 'No password.'});
