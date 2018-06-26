@@ -74,30 +74,32 @@ app.get('/update-data', async (req, res) => {
 
 app.get('/update', async (req, res) => {
   if(req.query.pass && req.query.pass == password) {
-    request.get({url: 'https://es.fifa.com/worldcup/matches/?cid=go_box', json: true}, (err, http, body) => {
-      if(err || !body) return res.json({error: err});
-      parseBody(body, response => {
-        if(response instanceof Array) {
-          try {
-            var updated = 0;
-            for(let item of response) {
-              if(item.nModified) updated++;
-            }
-            return res.json({updated_items: updated});
-          } catch (e) {
-            console.log(e);
-            return res.json({status: 'data updated', error: e});
+    try {
+      let response = await updateData();
+      if(!response) return res.json({success: false});
+      else if(response && response instanceof Array) {
+        try {
+          var updated = 0;
+          for(let item of response) {
+            if(item.nModified) updated++;
           }
-        } else return res.json(response);
-      });
-    });
+          return res.json({updated_items: updated});
+        } catch (e) {
+          console.log(e);
+          return res.json({status: 'data updated', error: e});
+        }
+      } else return res.json(response);
+    } catch (e) {
+      console.log(e);
+      return res.json({error: e});
+    }
   } else return res.json({error: 'No password.'});
 });
 
 app.post('/create-file', (req, res) => {
   if(req.body.pass && req.body.pass == password && req.body.url && req.body.file_name) {
     download(req.body.url, './public/images/matches/' + req.body.file_name, response => {
-      res.json(response);
+      return res.json(response);
     });
   } else return res.json({error: 'No password.'});
 });
@@ -327,5 +329,16 @@ var download = function(url, dest, callback) {
   .on('finish', () => {
     file.close();
     return callback({success: true});
+  });
+};
+
+var updateData = function () {
+  return new Promise((resolve, reject) => {
+    request.get({url: 'https://es.fifa.com/worldcup/matches/?cid=go_box', json: true}, (err, http, body) => {
+      if(err || !body) resolve(null);
+      parseBody(body, response => {
+        resolve(response);
+      });
+    });
   });
 };
