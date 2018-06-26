@@ -163,12 +163,16 @@ app.post('/update', async (req, res) => {
 });
 
 app.post('/find', async (req, res) => {
-  console.log(req.body);
+  let showOnlyLive = false;
   if(req.body.pass && req.body.pass == password) {
     //parse today and set current date
     if(req.body.query && req.body.query.date) {
       if(req.body.query.date == 'TODAY')
         req.body.query.date = moment().format("YYYYMMDD");
+    }
+
+    if(req.body.time && req.body.time == 'NOW') {
+      showOnlyLive = true;
     }
 
     try {
@@ -182,10 +186,19 @@ app.post('/find', async (req, res) => {
             if(moment.duration(time.diff(now))._data.seconds < 0) {
               match.in_about = 'EN VIVO';
               let minutes_pass = moment.duration(now.diff(time))._data.minutes;
-              if(minutes_pass > 0 && minutes_pass <= 45) match.status = minutes_pass + "'";
-              else if(minutes_pass > 45 && minutes_pass <= 60) match.status = 'Medio tiempo';
-              else if(minutes_pass > 60 && minutes_pass <= 105) match.status = (minutes_pass - 15) + "'";
-              else match.status = '';
+              let hours_pass = moment.duration(now.diff(time))._data.hours;
+              if(hours_pass == 0) {
+                if(minutes_pass > 0 && minutes_pass <= 47) match.status = minutes_pass + "'";
+                if(minutes_pass > 47 && minutes_pass <= 60) match.status = 'Medio tiempo.';
+                else match.status = ' ';
+              } else if(hours_pass == 1) {
+                if(minutes_pass > 2 && minutes_pass <= 49) match.status = '2T ' + minutes_pass + "'";
+                if(minutes_pass >= 50 && minutes_pass <= 60) match.status = '1er Tiempo extra';
+                else match.status = ' ';
+              } else if(hours_pass == 2) {
+                if(minutes_pass > 0 && minutes_pass <= 15) match.status = '2do Tiempo extra';
+                if(minutes_pass > 15) match.status = 'Penales.';
+              } else match.status = ' ';
             }
             else
               match.in_about = 'en ' + moment.duration(time.diff(now)).locale('es').humanize();
@@ -194,6 +207,13 @@ app.post('/find', async (req, res) => {
           }
         }
       }
+
+      if(showOnlyLive) {
+        matches = matches.filter(match => {
+          return match.in_about == 'EN VIVO';
+        });
+      }
+
       return res.status(matches.length ? 200 : 500).json({matches: matches});
     } catch (e) {
       return res.status(500).json({error: e});
