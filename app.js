@@ -80,6 +80,7 @@ app.get('/update', async (req, res) => {
       else if(response && response instanceof Array) {
         try {
           var updated = 0;
+          response = JSON.parse(JSON.stringify(response));
           for(let item of response) {
             if(item.nModified) updated++;
           }
