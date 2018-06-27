@@ -182,6 +182,8 @@ app.post('/find', async (req, res) => {
         if(match.status != 'Final del partido') {
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
           let now = moment();
+          console.log(time.format());
+          console.log(now.format());
           if(time.isValid()) {
             if(moment.duration(time.diff(now))._data.seconds < 0) {
               match.in_about = 'EN VIVO';
