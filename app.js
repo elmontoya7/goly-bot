@@ -64,20 +64,18 @@ app.get('/update', async (req, res) => {
 });
 
 app.post('/update', async (req, res) => {
-  if(req.body.pass && req.body.pass == password) {
+  if(req.body.pass && req.body.pass == password && req.body.update && req.body.update.match) {
     let match = req.body.update;
     let update_object = {};
     for(let key in match) {
-      if(key != '_id')
+      if(key != '_id' && key != 'match')
         update_object[key] = match[key];
     }
 
     try {
       let update = await updateMatch(
         {
-          team_home: match.team_home,
-          team_away: match.team_away,
-          date: match.date
+          match: match.match
         },
         {
           $set: update_object
@@ -85,9 +83,7 @@ app.post('/update', async (req, res) => {
       );
 
       let found = await findMatches({
-        team_home: match.team_home,
-        team_away: match.team_away,
-        date: match.date
+        match: match.match
       });
 
       return res.json({resource: found});
