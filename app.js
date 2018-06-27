@@ -23,24 +23,8 @@ app.use(bodyParser.json({limit: '20mb'}));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 
 var CronJob = require('cron').CronJob;
-var job = new CronJob('*/5 9-16 * * *', async function() {
-    try {
-      let response = await updateData();
-      if(response && response instanceof Array) {
-        try {
-          var updated = 0;
-          response = JSON.parse(JSON.stringify(response));
-          for(let item of response) {
-            if(item.nModified) updated++;
-          }
-          console.log('updated: ' + updated);
-        } catch (e) {
-          console.log(e);
-        }
-      } else console.log(response);
-    } catch (e) {
-      console.log(e);
-    }
+var job = new CronJob('*/2 9-16 * * *', async function() {
+    runUpdateFunction();
   },
   null,
   true,
@@ -48,55 +32,10 @@ var job = new CronJob('*/5 9-16 * * *', async function() {
 );
 
 if(job.running) console.log('Cron running!');
+else console.log('Cron ERROR. Will not update data automatically!');
 
 app.get('/', (req, res) => {
   res.send('Pulpo Bot v1.0');
-});
-
-app.get('/update-data', async (req, res) => {
-  if(req.query.pass && req.query.pass == password) {
-    try {
-      let matches = await findMatches({});
-      if(matches && matches.length) {
-        let promises = [];
-        for(match of new_matches_json.matches) {
-          promises.push(
-            updateMatch(
-              {
-                team_home: match.team_home,
-                team_away: match.team_away,
-                date: match.date
-              },
-              {
-                $set: {
-                  score: match.score,
-                  score_home: match.score_home,
-                  score_away: match.score_away,
-                  status: match.status,
-                  match: match.match,
-                  image: match.image,
-                  time: match.time
-                }
-              }
-            )
-          );
-        }
-
-        Promise.all(promises).then(results => {
-          console.log('All updated!');
-          return res.json(results);
-        }, err => {
-          console.log(err);
-          return res.json({error: err});
-        });
-      } else {
-        let created_matches = await createMatches(matches_json.matches);
-        return res.json(created_matches);
-      }
-    } catch (e) {
-      return res.status(500).json({error: e});
-    }
-  } else return res.json({error: 'No password.'});
 });
 
 app.get('/update', async (req, res) => {
@@ -124,17 +63,15 @@ app.get('/update', async (req, res) => {
   } else return res.json({error: 'No password.'});
 });
 
-app.post('/create-file', (req, res) => {
-  if(req.body.pass && req.body.pass == password && req.body.url && req.body.file_name) {
-    download(req.body.url, './public/images/matches/' + req.body.file_name, response => {
-      return res.json(response);
-    });
-  } else return res.json({error: 'No password.'});
-});
-
 app.post('/update', async (req, res) => {
   if(req.body.pass && req.body.pass == password) {
     let match = req.body.update;
+    let update_object = {};
+    for(let key in match) {
+      if(key != '_id')
+        update_object[key] = match[key];
+    }
+
     try {
       let update = await updateMatch(
         {
@@ -143,18 +80,17 @@ app.post('/update', async (req, res) => {
           date: match.date
         },
         {
-          $set: {
-            score: match.score,
-            score_home: match.score_home,
-            score_away: match.score_away,
-            status: match.status,
-            match: match.match,
-            image: match.image,
-            time: match.time
-          }
+          $set: update_object
         }
       );
-      return res.json(update);
+
+      let found = await findMatches({
+        team_home: match.team_home,
+        team_away: match.team_away,
+        date: match.date
+      });
+
+      return res.json({resource: found});
     } catch (e) {
       console.log(e);
       return res.json({error: e});
@@ -190,20 +126,21 @@ app.post('/find', async (req, res) => {
               let minutes_pass = moment.duration(now.diff(time))._data.minutes;
               let hours_pass = moment.duration(now.diff(time))._data.hours;
               if(hours_pass == 0) {
-                if(minutes_pass > 0 && minutes_pass <= 47) match.status = minutes_pass + "'";
-                else if(minutes_pass > 47 && minutes_pass <= 60) match.status = 'Medio tiempo.';
+                if(minutes_pass > 0 && minutes_pass <= 48) match.status = minutes_pass + "'";
+                else if(minutes_pass > 48 && minutes_pass <= 60) match.status = 'Medio tiempo.';
                 else match.status = ' ';
               } else if(hours_pass == 1) {
-                if(minutes_pass >= 2 && minutes_pass <= 50) match.status = '2T ' + minutes_pass + "'";
-                else if(minutes_pass > 50 && minutes_pass <= 60) match.status = '1er Tiempo extra';
+                if(minutes_pass >= 1 && minutes_pass <= 55) match.status = '2T ' + minutes_pass + "'";
+                else if(minutes_pass > 55 && minutes_pass <= 60) match.status = '1er Tiempo extra';
                 else match.status = ' ';
               } else if(hours_pass == 2) {
-                if(minutes_pass > 0 && minutes_pass <= 15) match.status = '2do Tiempo extra';
-                else if(minutes_pass > 15) match.status = 'Penales.';
+                if(minutes_pass > 0 && minutes_pass <= 18) match.status = '2do Tiempo extra';
+                else if(minutes_pass > 20) match.status = 'Penales.';
               } else match.status = ' ';
             }
             else
-              match.in_about = 'en ' + moment.duration(time.diff(now)).locale('es').humanize();
+              match.in_about = 'en ' + moment.duration(time.diff(now)).locale('es').humanize() +
+              ' (' + match.time + ')';
           } else {
             match.in_about = ' ';
           }
@@ -221,6 +158,15 @@ app.post('/find', async (req, res) => {
       return res.status(500).json({error: e});
     }
   } else return res.json({error: 'No password.'})
+});
+
+app.post('/create-file', (req, res) => {
+  if(req.body.pass && req.body.pass == password && req.body.url && req.body.file_name) {
+    download(req.body.url, './public/images/matches/' + req.body.file_name, response => {
+      runUpdateFunction();
+      return res.json(response);
+    });
+  } else return res.json({error: 'No password.'});
 });
 
 mongo.connect(mongo_url, function(err, client) {
@@ -295,7 +241,7 @@ function getJSON(file){
   return readJsonFileSync(filepath);
 }
 
-function parseBody (body, callback) {
+function parseMatchesData (body, callback) {
   let matches = [];
   var $ = cheerio.load(body);
   $('.fi-mu-list').each((index, row) => {
@@ -305,6 +251,8 @@ function parseBody (body, callback) {
         let match_obj = {};
         let match_row = $(match);
         match_obj.date = matches_row.attr('data-matchesdate');
+        match_obj.match_url = 'https://es.fifa.com' + match_row.attr('href');
+        match_obj.match_id = match_row.find('.fi-mu.result').first().attr('data-id');
         match_obj.formatted_date = match_row.find('.fi__info__datetime--abbr').first().text().trim();
         match_obj.group = match_row.find('.fi__info__group').first().text().trim();
         match_obj.status = match_row.find('span.period:not(.hidden)').first().text().trim() || 'Pendiente';
@@ -340,37 +288,7 @@ function parseBody (body, callback) {
     }
   });
 
-  let promises = [];
-  for(match of matches) {
-    promises.push(
-      updateMatch(
-        {
-          team_home: match.team_home,
-          team_away: match.team_away,
-          date: match.date
-        },
-        {
-          $set: {
-            score: match.score,
-            score_home: match.score_home,
-            score_away: match.score_away,
-            status: match.status,
-            match: match.match,
-            image: match.image,
-            time: match.time
-          }
-        }
-      )
-    );
-  }
-
-  Promise.all(promises).then(results => {
-    console.log('All updated!');
-    return callback(results);
-  }, err => {
-    console.log(err);
-    return callback({error: err});
-  });
+  return callback(matches);
 }
 
 var download = function(url, dest, callback) {
@@ -390,9 +308,61 @@ var updateData = function () {
   return new Promise((resolve, reject) => {
     request.get({url: 'https://es.fifa.com/worldcup/matches/?cid=go_box', json: true}, (err, http, body) => {
       if(err || !body) resolve(null);
-      parseBody(body, response => {
-        resolve(response);
+      parseMatchesData(body, matches => {
+        let promises = [];
+        for(match of matches) {
+          promises.push(
+            updateMatch(
+              {
+                team_home: match.team_home,
+                team_away: match.team_away,
+                date: match.date
+              },
+              {
+                $set: {
+                  score: match.score,
+                  score_home: match.score_home,
+                  score_away: match.score_away,
+                  status: match.status,
+                  match: match.match,
+                  image: match.image,
+                  time: match.time,
+                  match_url: match.match_url,
+                  match_id: match.match_id
+                }
+              }
+            )
+          );
+        }
+
+        Promise.all(promises).then(results => {
+          console.log('All updated!');
+          return resolve(results);
+        }, err => {
+          console.log(err);
+          return resolve({error: err});
+        });
       });
     });
   });
+};
+
+var runUpdateFunction = async function () {
+  try {
+    let response = await updateData();
+    if(response && response instanceof Array) {
+      try {
+        var updated = 0;
+        response = JSON.parse(JSON.stringify(response));
+        for(let item of response) {
+          if(item.nModified) updated++;
+        }
+        console.log('CRON triggered. Updated: ' + updated);
+      } catch (e) {
+        console.log(e);
+      }
+    } else console.log(response);
+  } catch (e) {
+    console.log(e);
+  }
 };
