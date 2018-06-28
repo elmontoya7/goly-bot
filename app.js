@@ -110,7 +110,7 @@ app.post('/find', async (req, res) => {
     try {
       let matches = await findMatches(req.body.query || {}, req.body.limit || 0, req.body.sort || {});
       for(match of matches) {
-        match.video = match.video ? match.video : match.match_url;
+        match.video = match.video ? match.video : match.match_url + '#match-liveblog';
         match.in_about = ' ';
         if(match.status != 'Final del partido') {
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
