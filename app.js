@@ -112,7 +112,9 @@ app.post('/find', async (req, res) => {
       for(match of matches) {
         match.video = match.video ? match.video : match.match_url + '#match-liveblog';
         match.in_about = ' ';
+        match.button_name = 'Ver goles';
         if(match.status != 'Final del partido') {
+          match.button_name = 'Ver detalles';
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
           let now = moment();
           console.log(time.format());
