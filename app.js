@@ -138,7 +138,7 @@ app.post('/find', async (req, res) => {
               } else match.status = ' ';
             }
             else
-              match.in_about = 'en ' + moment.duration(time.diff(now)).locale('es').humanize() +
+              match.in_about = moment.duration(time.diff(now)).locale('es').humanize(true) +
               ' (' + match.time + ')';
           } else {
             match.in_about = ' ';
