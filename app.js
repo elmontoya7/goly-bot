@@ -192,12 +192,12 @@ let createMatches = items => {
   });
 };
 
-let updateMatch = (item, newData) => {
+let updateMatch = (item, newData, opts) => {
   return new Promise ((resolve, reject) => {
     mongo.connect(mongo_url, function (err, db) {
       if(err) return resolve(null);
       var dbase = db.db(db_name);
-      dbase.collection('match').updateOne(item, newData, function (err, res) {
+      dbase.collection('match').updateOne(item, newData, opts || {}, function (err, res) {
         db.close();
         if(err || !res) return resolve(null);
         return resolve(res);
@@ -243,46 +243,50 @@ function parseMatchesData (body, callback) {
   var $ = cheerio.load(body);
   $('.fi-mu-list').each((index, row) => {
     let matches_row = $(row);
-    if(parseInt(matches_row.attr('data-matchesdate')) <= 20180628) {
-      matches_row.find('.fi-mu__link').each((index, match) => {
-        let match_obj = {};
-        let match_row = $(match);
-        match_obj.date = matches_row.attr('data-matchesdate');
-        match_obj.match_url = 'https://es.fifa.com' + match_row.attr('href');
-        match_obj.match_id = match_row.find('.fi-mu.result').first().attr('data-id');
-        match_obj.formatted_date = match_row.find('.fi__info__datetime--abbr').first().text().trim();
-        match_obj.group = match_row.find('.fi__info__group').first().text().trim();
-        match_obj.status = match_row.find('span.period:not(.hidden)').first().text().trim() || 'Pendiente';
+    matches_row.find('.fi-mu__link').each((index, match) => {
+      let match_obj = {};
+      let match_row = $(match);
+      match_obj.date = matches_row.attr('data-matchesdate');
+      if(!match_obj.date)
+        match_obj.date = moment(match_row.find('.fi-mu__info__datetime').first().attr('data-utcdate')).format('YYYYMMDD');
+      match_obj.match_url = 'https://es.fifa.com' + match_row.attr('href');
+      match_obj.match_id = match_row.find('.fi-mu.result').first().attr('data-id');
+      if(!match_obj.match_id)
+        match_obj.match_id = match_row.find('.fi-mu.fixture').first().attr('data-id');
+      match_obj.formatted_date = match_row.find('.fi__info__datetime--abbr').first().text().trim();
+      match_obj.group = match_row.find('.fi__info__group').first().text().trim();
+      if(match_obj.group == '')
+        match_obj.group = matches_row.find('span.fi-mu-list__head__date').first().text().trim();
+      match_obj.status = match_row.find('span.period:not(.hidden)').first().text().trim() || 'Pendiente';
 
-        let team_home = match_row.find('.fi-t.home').first();
-        match_obj.team_home = team_home.find('.fi-t__nText').first().text().trim();
-        let team_away = match_row.find('.fi-t.away').first();
-        match_obj.team_away = team_away.find('.fi-t__nText').first().text().trim();
+      let team_home = match_row.find('.fi-t.home').first();
+      match_obj.team_home = team_home.find('.fi-t__nText').first().text().trim();
+      let team_away = match_row.find('.fi-t.away').first();
+      match_obj.team_away = team_away.find('.fi-t__nText').first().text().trim();
 
-        match_obj.time = match_row.find('.fi-s__score.fi-s__date-HHmm').first().attr('data-timeutc');
-        match_obj.time = moment(match_obj.time, "HH:mm").subtract(5, 'hours').format('HH:mm');
+      match_obj.time = match_row.find('.fi-s__score.fi-s__date-HHmm').first().attr('data-timeutc');
+      match_obj.time = moment(match_obj.time, "HH:mm").subtract(5, 'hours').format('HH:mm');
 
-        let score = match_row.find('span.fi-s__scoreText').first().text().trim();
-        if(score.indexOf("-") == -1) {
-          match_obj.score = 'vs';
-          match_obj.score_home = "0";
-          match_obj.score_away = "0";
-        } else {
-          match_obj.score = score;
-          match_obj.score_home = score.split('-')[0];
-          match_obj.score_away = score.split('-')[1];
-        }
+      let score = match_row.find('span.fi-s__scoreText').first().text().trim();
+      if(score.indexOf("-") == -1) {
+        match_obj.score = 'vs';
+        match_obj.score_home = "0";
+        match_obj.score_away = "0";
+      } else {
+        match_obj.score = score;
+        match_obj.score_home = score.split('-')[0];
+        match_obj.score_away = score.split('-')[1];
+      }
 
-        match_obj.match = matches.length + 1;
-        if (fs.existsSync(__dirname + '/public/images/matches/' + match_obj.match + '.jpg')) {
-          match_obj.image = 'http://ec2-54-200-239-86.us-west-2.compute.amazonaws.com/images/matches/' + match_obj.match + '.jpg';
-        } else {
-          match_obj.image = 'http://ec2-54-200-239-86.us-west-2.compute.amazonaws.com/images/russia_back.jpg';
-        }
+      match_obj.match = matches.length + 1;
+      if (fs.existsSync(__dirname + '/public/images/matches/' + match_obj.match + '.jpg')) {
+        match_obj.image = 'http://ec2-54-200-239-86.us-west-2.compute.amazonaws.com/images/matches/' + match_obj.match + '.jpg';
+      } else {
+        match_obj.image = 'http://ec2-54-200-239-86.us-west-2.compute.amazonaws.com/images/russia_back.jpg';
+      }
 
-        matches.push(match_obj);
-      });
-    }
+      matches.push(match_obj);
+    });
   });
 
   return callback(matches);
@@ -311,22 +315,28 @@ var updateData = function () {
           promises.push(
             updateMatch(
               {
-                team_home: match.team_home,
-                team_away: match.team_away,
-                date: match.date
+                match: match.match
               },
               {
                 $set: {
+                  date: match.date,
+                  formatted_date: match.formatted_date,
+                  group: match.group,
+                  status: match.status,
+                  team_home: match.team_home,
+                  team_away: match.team_away,
+                  time: match.time,
                   score: match.score,
                   score_home: match.score_home,
                   score_away: match.score_away,
-                  status: match.status,
-                  match: match.match,
                   image: match.image,
-                  time: match.time,
-                  match_url: match.match_url,
-                  match_id: match.match_id
+                  match: match.match,
+                  match_id: match.match_id,
+                  match_url: match.match_url
                 }
+              },
+              {
+                upsert: true
               }
             )
           );
