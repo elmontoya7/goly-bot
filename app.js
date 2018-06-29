@@ -250,7 +250,7 @@ function parseMatchesData (body, callback) {
       let match_row = $(match);
       match_obj.date = matches_row.attr('data-matchesdate');
       if(!match_obj.date)
-        match_obj.date = moment(match_row.find('.fi-mu__info__datetime').first().attr('data-utcdate')).format('YYYYMMDD');
+        match_obj.date = moment.utc(match_row.find('.fi-mu__info__datetime').first().attr('data-utcdate')).format('YYYYMMDD');
       match_obj.match_url = 'https://es.fifa.com' + match_row.attr('href');
       match_obj.match_id = match_row.find('.fi-mu.result').first().attr('data-id');
       if(!match_obj.match_id)
