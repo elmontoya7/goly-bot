@@ -112,7 +112,7 @@ app.post('/find', async (req, res) => {
       for(match of matches) {
         match.video = match.video ? match.video : match.match_url + '#match-liveblog';
         match.in_about = ' ';
-        match.button_name = 'Ver goles';
+        match.button_name = 'Ver goles ⚽️';
         if(match.status != 'Final del partido') {
           match.button_name = 'Ver detalles';
           let time = moment(match.date + ' ' + match.time, 'YYYYMMDD HH:mm');
@@ -122,6 +122,7 @@ app.post('/find', async (req, res) => {
           if(time.isValid()) {
             if(moment.duration(time.diff(now))._data.seconds < 0) {
               match.in_about = 'EN VIVO';
+              match.button_name = 'Minuto a minuto ⏱';
               let minutes_pass = moment.duration(now.diff(time))._data.minutes;
               let hours_pass = moment.duration(now.diff(time))._data.hours;
               if(hours_pass == 0) {
