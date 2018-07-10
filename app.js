@@ -34,6 +34,8 @@ var job = new CronJob('*/2 9-16 * * *', async function() {
 if(job.running) console.log('Cron running!');
 else console.log('Cron ERROR. Will not update data automatically!');
 
+app.use('/facebook', require('./routes/index'));
+
 app.get('/', (req, res) => {
   res.send('Pulpo Bot v1.0');
 });
