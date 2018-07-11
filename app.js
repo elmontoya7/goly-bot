@@ -36,6 +36,7 @@ if(job.running) console.log('Cron running!');
 else console.log('Cron ERROR. Will not update data automatically!');
 
 app.use('/facebook', require('./routes/index'));
+app.use('/whatsapp', require('./routes/wa'));
 
 app.get('/', (req, res) => {
   res.send('Pulpo Bot v1.0');
