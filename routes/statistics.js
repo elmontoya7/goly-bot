@@ -16,8 +16,8 @@ router.get('/update', (req, res) => {
 var updateData = type => {
   return new Promise((resolve, reject) => {
     request.get({url: types[type], json:true}, (err, http, body) => {
-      ir(err || !body) return resolve(null);
-      
+      if(err || !body) return resolve(null);
+      return resolve('ok');
     });
   });
 };
