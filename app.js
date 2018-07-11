@@ -7,6 +7,7 @@ var fs = require('fs');
 var request = require('request');
 require('dotenv').config()
 var app = express();
+var statistics = require('./routes/statistics');
 
 app.use(express.static('public'));
 
@@ -175,6 +176,8 @@ mongo.connect(mongo_url, function(err, client) {
   const db = client.db(db_name);
   client.close();
 });
+
+app.use('/statistics', statistics);
 
 app.listen(3000, function () {});
 
